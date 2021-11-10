@@ -33,6 +33,11 @@ class Beer
      */
     private $producteur_id;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Bucket::class, inversedBy="beer_id")
+     */
+    private $bucket;
+
 
     public function getId(): ?int
     {
@@ -71,6 +76,18 @@ class Beer
     public function setProducteurId(?ProducteurId $producteur_id): self
     {
         $this->producteurId = $producteur_id;
+
+        return $this;
+    }
+
+    public function getBucket(): ?Bucket
+    {
+        return $this->bucket;
+    }
+
+    public function setBucket(?Bucket $bucket): self
+    {
+        $this->bucket = $bucket;
 
         return $this;
     }
