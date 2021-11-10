@@ -24,7 +24,7 @@
                 <td class="w-1/5 text-center">{{ producteur.name }}</td>
                 <td class="w-1/5 text-center">{{ producteur.email }}</td>
                 <td class="w-1/5 text-center">{{ producteur.photo }}</td>
-                <td class="w-1/5 text-center">{{ producteur.dateOfBirth }}</td>
+                <td class="w-1/5 text-center">{{ producteur.dateOfBirth|date("m/d/Y") }}</td>
                 <td class="w-1/5 text-center">
                     <a href="{{ path('producteur_show', {'id': producteur.id}) }}"><button class="border-2 border-black">show</button></a>
                     <a href="{{ path('producteur_edit', {'id': producteur.id}) }}"><button class="border-2 border-black">edit</button></a>

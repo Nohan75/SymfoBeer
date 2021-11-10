@@ -6,6 +6,8 @@ use App\Repository\ProducteurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 /**
  * @ORM\Entity(repositoryClass=ProducteurRepository::class)
@@ -35,17 +37,14 @@ class Producteur
     private $photo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date", length=255)
      */
     private $dateOfBirth;
 
     /**
-     * @ORM\OneToMany(targetEntity=Beer::class, mappedBy="producteur")
+     * @ORM\OneToMany(targetEntity=Beer::class, mappedBy="producteur_id")
      */
     private $beers;
-
-
-
 
 
     public function __construct()
@@ -94,12 +93,12 @@ class Producteur
         return $this;
     }
 
-    public function getDateOfBirth(): ?string
+    public function getDateOfBirth(): ?\DateTime
     {
         return $this->dateOfBirth;
     }
 
-    public function setDateOfBirth(string $dateOfBirth): self
+    public function setDateOfBirth(\DateTime  $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
 

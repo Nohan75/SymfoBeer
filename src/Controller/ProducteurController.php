@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Beer;
 use App\Entity\Producteur;
 use App\Form\ProducteurType;
+use App\Repository\BeerRepository;
 use App\Repository\ProducteurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,7 +56,7 @@ class ProducteurController extends AbstractController
     public function show(Producteur $producteur): Response
     {
         return $this->render('producteur/show.html.twig', [
-            'producteur' => $producteur,
+            'producteur' => $producteur
         ]);
     }
 
