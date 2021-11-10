@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Beer;
+use App\Entity\Producteur;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,7 +16,10 @@ class BeerType extends AbstractType
         $builder
             ->add('name')
             ->add('type')
-            ->add('producteur_id');
+            ->add('producteur_id', EntityType::class, [
+                'class' => Producteur::class,
+                'choice_label' => 'name'
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

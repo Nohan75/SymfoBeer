@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Beer;
+use App\Entity\Bucket;
+use App\Entity\Client;
 use App\Form\BeerType;
 use App\Repository\BeerRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +26,32 @@ class BeerController extends AbstractController
         return $this->render('beer/index.html.twig', [
             'beers' => $beerRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/all", name="beerview")
+     */
+    public function allBeer(BeerRepository $beerRepository): Response
+    {
+        return $this->render('beerview/index.html.twig', [
+            'beers' => $beerRepository->findBeers(),
+        ]);
+    }
+
+    /**
+     * @Route("/addcart/{beer_id}", name="add_cart")
+     * @return Response
+     */
+    public function buyBeer(string $beer_id, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $beer = $entityManager->getRepository(Beer::class)->findOneBeer($beer_id);
+        $client = $entityManager->getRepository(Client::class)->findOneClient(1);
+        $panier = new Bucket();
+        $panier->addBeerId($beer)
+            ->setClientId($client);
+        $entityManager->persist($panier);
+        $entityManager->flush();
+        return $this->render('beerview/index.html.twig');
     }
 
     /**
@@ -91,4 +120,6 @@ class BeerController extends AbstractController
 
         return $this->redirectToRoute('beer_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

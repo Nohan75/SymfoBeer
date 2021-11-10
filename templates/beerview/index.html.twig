@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos bières{% endblock %}
+
+{% block body %}
+    <div class="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover" id="modal-id">
+        <div class="absolute bg-black opacity-80 inset-0 z-0"></div>
+        <div class="relative min-h-screen flex flex-col items-center justify-center ">
+            <div class="grid mt-8  gap-8 grid-cols-1 md:grid-cols-3 xl:grid-cols-3">
+                {% for beer in beers %}
+                    <div class="flex flex-col">
+                    <div class="bg-white shadow-md  rounded-3xl p-4">
+                        <div class="flex-none lg:flex">
+                            <div class=" h-full w-full lg:h-48 lg:w-48   lg:mb-0 mb-3">
+                                <img src="https://images.unsplash.com/photo-1622180203374-9524a54b734d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1950&amp;q=80"
+                                     alt="Just a flower" class=" w-full  object-scale-down lg:object-cover  lg:h-48 rounded-2xl">
+                            </div>
+                            <div class="flex-auto ml-3 justify-evenly py-2">
+                                <div class="flex flex-wrap ">
+                                    <div class="w-full flex-none text-xs text-blue-700 font-medium ">
+                                        Shop
+                                    </div>
+                                    <h2 class="flex-auto text-lg font-medium">{{ beer.name }}</h2>
+                                </div>
+                                <p class="mt-3"></p>
+                                <div class="flex py-4  text-sm text-gray-500">
+                                    <div class="flex-1 inline-flex items-center">
+                                       Type : {{ beer.type }}
+                                    </div>
+                                </div>
+                                <div class="flex p-4 pb-2 border-t border-gray-200 "></div>
+                                <div class="flex space-x-3 text-sm font-medium">
+                                    <div class="flex-auto flex space-x-3">
+                                        <button class="mb-2 md:mb-0 bg-white px-4 py-2 shadow-sm tracking-wider border text-gray-600 rounded-full hover:bg-gray-100 inline-flex items-center space-x-2 ">
+                                            <span>62</span>
+                                        </button>
+                                    </div>
+                                    <a
+                                            class="mb-2 md:mb-0 bg-gray-900 px-5 py-2 shadow-sm tracking-wider text-white rounded-full hover:bg-gray-800"
+                                            type="button" aria-label="like" href="{{ path('add_cart', {'beer_id': beer.id}) }}">Buy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
