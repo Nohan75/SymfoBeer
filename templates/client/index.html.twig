@@ -3,30 +3,31 @@
 {% block title %}Client index{% endblock %}
 
 {% block body %}
-    <h1>Client index</h1>
-
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <h1 class="font-serif font-medium text-2xl">Client index</h1>
+    <br>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>DateOfBirth</th>
-                <th>Prenom</th>
-                <th>actions</th>
+                <th class="w-1/5">Id</th>
+                <th class="w-1/5">Name</th>
+                <th class="w-1/5">Email</th>
+                <th class="w-1/5">DateOfBirth</th>
+                <th class="w-1/5">Prenom</th>
+                <th class="w-1/5">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for client in clients %}
             <tr>
-                <td>{{ client.id }}</td>
-                <td>{{ client.name }}</td>
-                <td>{{ client.email }}</td>
-                <td>{{ client.dateOfBirth }}</td>
-                <td>{{ client.prenom }}</td>
-                <td>
-                    <a href="{{ path('client_show', {'id': client.id}) }}">show</a>
-                    <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
+                <td class="w-1/5 text-center">{{ client.id }}</td>
+                <td class="w-1/5 text-center">{{ client.name }}</td>
+                <td class="w-1/5 text-center">{{ client.email }}</td>
+                <td class="w-1/5 text-center">{{ client.dateOfBirth }}</td>
+                <td class="w-1/5 text-center">{{ client.prenom }}</td>
+                <td class="w-1/5 text-center">
+                    <a href="{{ path('client_show', {'id': client.id}) }}"><button class="border-2 border-black">show</button></a>
+                    <a href="{{ path('client_edit', {'id': client.id}) }}"><button class="border-2 border-black">edit</button></a>
                 </td>
             </tr>
         {% else %}
@@ -36,6 +37,7 @@
         {% endfor %}
         </tbody>
     </table>
+    <br>
 
-    <a href="{{ path('client_new') }}">Create new</a>
+    <a href="{{ path('client_new') }}"><button class="rounded-full py-1 px-2 border-2 border-black" > Create new </button></a>
 {% endblock %}
