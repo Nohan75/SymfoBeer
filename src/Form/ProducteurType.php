@@ -2,30 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\Brewerie;
+use App\Entity\Producteur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BrewerieType extends AbstractType
+class ProducteurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name')
-            ->add('adress')
-            ->add('brand')
-            ->add('city')
-            ->add('state')
-            ->add('country')
-            ->add('zipcode')
+            ->add('email')
+            ->add('photo')
+            ->add('dateOfBirth')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Brewerie::class,
+            'data_class' => Producteur::class,
         ]);
     }
 }
