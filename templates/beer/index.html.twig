@@ -3,26 +3,28 @@
 {% block title %}Beer index{% endblock %}
 
 {% block body %}
-    <h1>Beer index</h1>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <h1 class="font-serif font-medium text-2xl">Beer index</h1>
+    <br>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>actions</th>
+                <th class="w-1/5">Id</th>
+                <th class="w-1/5">Name</th>
+                <th class="w-1/5">Type</th>
+                <th class="w-1/5">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for beer in beers %}
             <tr>
-                <td>{{ beer.id }}</td>
-                <td>{{ beer.name }}</td>
-                <td>{{ beer.type }}</td>
-                <td>
-                    <a href="{{ path('beer_show', {'id': beer.id}) }}">show</a>
-                    <a href="{{ path('beer_edit', {'id': beer.id}) }}">edit</a>
+                <td class="w-1/5 text-center">{{ beer.id }}</td>
+                <td class="w-1/5 text-center">{{ beer.name }}</td>
+                <td class="w-1/5 text-center">{{ beer.type }}</td>
+                <td class="w-1/5 text-center">
+                    <a href="{{ path('beer_show', {'id': beer.id}) }}"><button class="border-2 border-black"> Show</button></a>
+                    <a href="{{ path('beer_edit', {'id': beer.id}) }}"><button class="border-2 border-black"> Edit</button></a>
                 </td>
             </tr>
         {% else %}
@@ -32,6 +34,9 @@
         {% endfor %}
         </tbody>
     </table>
+    <br>
 
-    <a href="{{ path('beer_new') }}">Create new</a>
+
+    <a href="{{ path('beer_new') }}"><button class="rounded-full py-1 px-2 border-2 border-black" > Create new </button> </a>
+
 {% endblock %}
