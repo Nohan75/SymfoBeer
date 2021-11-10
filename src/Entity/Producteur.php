@@ -40,11 +40,6 @@ class Producteur
     private $dateOfBirth;
 
     /**
-     * @ORM\OneToMany(targetEntity=Beer::class, mappedBy="producteur_id")
-     */
-    private $beer_id;
-
-    /**
      * @ORM\OneToMany(targetEntity=Beer::class, mappedBy="producteur")
      */
     private $beers;
@@ -55,7 +50,6 @@ class Producteur
 
     public function __construct()
     {
-        $this->beer_id = new ArrayCollection();
         $this->beers = new ArrayCollection();
     }
 
@@ -108,36 +102,6 @@ class Producteur
     public function setDateOfBirth(string $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Beer[]
-     */
-    public function getBeerId(): Collection
-    {
-        return $this->beer_id;
-    }
-
-    public function addBeerId(Beer $beerId): self
-    {
-        if (!$this->beer_id->contains($beerId)) {
-            $this->beer_id[] = $beerId;
-            $beerId->setProducteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBeerId(Beer $beerId): self
-    {
-        if ($this->beer_id->removeElement($beerId)) {
-            // set the owning side to null (unless already changed)
-            if ($beerId->getProducteur() === $this) {
-                $beerId->setProducteur(null);
-            }
-        }
 
         return $this;
     }

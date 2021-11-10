@@ -29,9 +29,9 @@ class Beer
 
     /**
      * @ORM\ManyToOne(targetEntity=Producteur::class, inversedBy="beers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $producteur_id;
+    private $producteur;
 
 
     public function getId(): ?int
@@ -63,14 +63,14 @@ class Beer
         return $this;
     }
 
-    public function getProducteurId(): ?ProducteurId
+    public function getProducteurId(): ?Producteur
     {
-        return $this->producteur_id;
+        return $this->producteur;
     }
 
-    public function setProducteurId(?ProducteurId $producteur_id): self
+    public function setProducteurId(?Producteur $producteur): self
     {
-        $this->producteurId = $producteur_id;
+        $this->producteur = $producteur;
 
         return $this;
     }
