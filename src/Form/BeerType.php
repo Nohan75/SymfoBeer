@@ -14,7 +14,7 @@ class BeerType extends AbstractType
         $builder
             ->add('name')
             ->add('type')
-        ;
+            ->add('producteur_id');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
