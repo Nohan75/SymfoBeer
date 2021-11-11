@@ -1,9 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Client index{% endblock %}
+{% block page %}Client{% endblock %}
+{% block menu %}
+    <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+        <li><a class="hover:text-gray-200" href="{{ path('home') }}">Home</a></li>
+        <li><a class="hover:text-gray-200" href="{{ path('beer_index') }}">Beer</a></li>
+        <li><a class="hover:text-gray-200" href="{{ path('producteur_index') }}">Producer</a></li>
+    </ul>
+{% endblock %}
 
 {% block body %}
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <h1 class="font-serif font-medium text-2xl">Client index</h1>
     <br>
     <table class="table">
@@ -14,7 +21,6 @@
                 <th class="w-1/5">Email</th>
                 <th class="w-1/5">DateOfBirth</th>
                 <th class="w-1/5">Prenom</th>
-                <th class="w-1/5">actions</th>
             </tr>
         </thead>
         <tbody>
