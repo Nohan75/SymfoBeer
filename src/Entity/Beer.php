@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\BeerRepository;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @ORM\Entity(repositoryClass=BeerRepository::class)
@@ -29,7 +30,7 @@ class Beer
 
     /**
      * @ORM\ManyToOne(targetEntity=Producteur::class, inversedBy="beers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $producteur_id;
 
@@ -63,14 +64,14 @@ class Beer
         return $this;
     }
 
-    public function getProducteurId(): ?ProducteurId
+    public function getProducteurId(): ?Producteur
     {
         return $this->producteur_id;
     }
 
-    public function setProducteurId(?ProducteurId $producteur_id): self
+    public function setProducteurId( ?Producteur $producteur_id): self
     {
-        $this->producteurId = $producteur_id;
+        $this->producteur_id = $producteur_id;
 
         return $this;
     }

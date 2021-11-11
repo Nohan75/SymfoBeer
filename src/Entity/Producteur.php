@@ -6,6 +6,8 @@ use App\Repository\ProducteurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 /**
  * @ORM\Entity(repositoryClass=ProducteurRepository::class)
@@ -35,27 +37,18 @@ class Producteur
     private $photo;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date", length=255)
      */
     private $dateOfBirth;
 
     /**
      * @ORM\OneToMany(targetEntity=Beer::class, mappedBy="producteur_id")
      */
-    private $beer_id;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Beer::class, mappedBy="producteur")
-     */
     private $beers;
-
-
-
 
 
     public function __construct()
     {
-        $this->beer_id = new ArrayCollection();
         $this->beers = new ArrayCollection();
     }
 
@@ -100,44 +93,14 @@ class Producteur
         return $this;
     }
 
-    public function getDateOfBirth(): ?string
+    public function getDateOfBirth(): ?\DateTime
     {
         return $this->dateOfBirth;
     }
 
-    public function setDateOfBirth(string $dateOfBirth): self
+    public function setDateOfBirth(\DateTime  $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Beer[]
-     */
-    public function getBeerId(): Collection
-    {
-        return $this->beer_id;
-    }
-
-    public function addBeerId(Beer $beerId): self
-    {
-        if (!$this->beer_id->contains($beerId)) {
-            $this->beer_id[] = $beerId;
-            $beerId->setProducteur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeBeerId(Beer $beerId): self
-    {
-        if ($this->beer_id->removeElement($beerId)) {
-            // set the owning side to null (unless already changed)
-            if ($beerId->getProducteur() === $this) {
-                $beerId->setProducteur(null);
-            }
-        }
 
         return $this;
     }

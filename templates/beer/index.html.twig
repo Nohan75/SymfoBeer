@@ -1,9 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Beer index{% endblock %}
+{% block page %}Beer{% endblock %}
+{% block menu %}
+    <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+        <li><a class="hover:text-gray-200" href="{{ path('home') }}">Home</a></li>
+        <li><a class="hover:text-gray-200" href="{{ path('producteur_index') }}">Producer</a></li>
+        <li><a class="hover:text-gray-200" href="{{ path('client_index') }}">Client</a></li>
+    </ul>
+{% endblock %}
 
 {% block body %}
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <h1 class="font-serif font-medium text-2xl">Beer index</h1>
     <br>
 
@@ -13,7 +20,6 @@
                 <th class="w-1/5">Id</th>
                 <th class="w-1/5">Name</th>
                 <th class="w-1/5">Type</th>
-                <th class="w-1/5">actions</th>
             </tr>
         </thead>
         <tbody>
