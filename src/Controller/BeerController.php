@@ -42,7 +42,7 @@ class BeerController extends AbstractController
      * @Route("/addcart/{beer_id}", name="add_cart")
      * @return Response
      */
-    public function buyBeer(string $beer_id, EntityManagerInterface $entityManager, Request $request): Response
+    public function buyBeer(string $beer_id, EntityManagerInterface $entityManager): Response
     {
         $beer = $entityManager->getRepository(Beer::class)->findOneBeer($beer_id);
         $client = $entityManager->getRepository(Client::class)->findOneClient(1);
