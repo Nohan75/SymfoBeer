@@ -24,10 +24,16 @@ class Producteur
     /**
      * @ORM\Column(type="string", length=255)
      */
+    /**
+     * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
+     */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     */
+    /**
+     * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
      */
     private $email;
 
@@ -38,6 +44,9 @@ class Producteur
 
     /**
      * @ORM\Column(type="date", length=255)
+     */
+    /**
+     * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
      */
     private $dateOfBirth;
 
