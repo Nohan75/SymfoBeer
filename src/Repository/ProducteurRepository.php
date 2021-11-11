@@ -19,32 +19,11 @@ class ProducteurRepository extends ServiceEntityRepository
         parent::__construct($registry, Producteur::class);
     }
 
-    // /**
-    //  * @return Producteur[] Returns an array of Producteur objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findBeers(int $produteurid): array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findBy($produteurid);
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Producteur
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+
+
 }

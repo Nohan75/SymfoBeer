@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'producteur/index.html.twig' %}
 
 {% block title %}Producteur{% endblock %}
 
@@ -25,7 +25,14 @@
             </tr>
             <tr>
                 <th>DateOfBirth</th>
-                <td>{{ producteur.dateOfBirth }}</td>
+                <td>{{ producteur.dateOfBirth|date("m/d/Y") }}</td>
+            </tr>
+            <tr>
+                <th>Beers</th>
+                <td>{% for beer in producteur.beers %}
+                    <li>{{ beer.name }}</li>
+                    {% endfor %}
+                </td>
             </tr>
         </tbody>
     </table>
