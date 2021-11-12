@@ -98,16 +98,19 @@ class BeerController extends AbstractController
     /**
      * @Route("/{id}/edit", name="beer_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Beer $beer): Response
+    public function edit(int $id): Response
     {
-        $form = $this->createForm(BeerType::class, $beer);
-        $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
+        $beer = $entityManager->getRepository(Beer::class)->find($id);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('beer_index', [], Response::HTTP_SEE_OTHER);
+        if (!$beer) {
+            throw $this->createNotFoundException(
+                'No beer found for id ' . $id
+            );
         }
+        $entityManager->flush();
+        return $this->redirectToRoute('beer_index', [], Response::HTTP_SEE_OTHER);
+
 
         return $this->renderForm('beer/edit.html.twig', [
             'beer' => $beer,
@@ -118,13 +121,19 @@ class BeerController extends AbstractController
     /**
      * @Route("/{id}", name="beer_delete", methods={"POST"})
      */
-    public function delete(Request $request, Beer $beer): Response
+    public function delete(int $id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$beer->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($beer);
-            $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $beer = $entityManager->getRepository(Client::class)->find($id);
+
+        if (!$beer) {
+            throw $this->createNotFoundException(
+                'No beer found for id ' . $id
+            );
         }
+        $entityManager->flush();
+        return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
+
 
         return $this->redirectToRoute('beer_index', [], Response::HTTP_SEE_OTHER);
     }
