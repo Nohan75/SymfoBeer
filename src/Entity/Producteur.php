@@ -42,8 +42,9 @@ class Producteur
     /**
      * @ORM\Column(type="date", length=255)
      * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
+     * * @Assert\LessThanOrEqual("-16 years")
      */
-    private $dateOfBirth;
+    protected $dateOfBirth;
 
     /**
      * @ORM\OneToMany(targetEntity=Beer::class, mappedBy="producteur_id")

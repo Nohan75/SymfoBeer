@@ -19,7 +19,8 @@ class ClientRepository extends ServiceEntityRepository
         parent::__construct($registry, Client::class);
     }
 
-    public function findOneClient(int $id){
+    public function findOneClient(int $id)
+    {
         return $this->findOneBy(['id'=>$id]);
     }
 

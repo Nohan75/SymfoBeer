@@ -44,6 +44,7 @@ class ProducteurController extends AbstractController
             return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
         }
 
+
         return $this->renderForm('producteur/new.html.twig', [
             'producteur' => $producteur,
             'form' => $form,
@@ -60,29 +61,30 @@ class ProducteurController extends AbstractController
             ->find($id);
         if (!$producteur) {
             throw $this->createNotFoundException(
-                'No produteur found for id '.$id
+                'No produteur found for id ' . $id
             );
         }
         return $this->render('producteur/show.html.twig', [
             'producteur' => $producteur
         ]);
-
     }
 
 
     /**
      * @Route("/{id}/edit", name="producteur_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Producteur $producteur): Response
+    public function edit(int $id): Response
     {
-        $form = $this->createForm(ProducteurType::class, $producteur);
-        $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
+        $producteur = $entityManager->getRepository(Beer::class)->find($id);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
+        if (!$producteur) {
+            throw $this->createNotFoundException(
+                'No producteur found for id ' . $id
+            );
         }
+        $entityManager->flush();
+        return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
 
         return $this->renderForm('producteur/edit.html.twig', [
             'producteur' => $producteur,
@@ -93,14 +95,23 @@ class ProducteurController extends AbstractController
     /**
      * @Route("/{id}", name="producteur_delete", methods={"POST"})
      */
-    public function delete(Request $request, Producteur $producteur): Response
+    public function delete(int $id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$producteur->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($producteur);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $producteur = $entityManager->getRepository(Producteur::class)->find($id);
+        $beer = $entityManager->getRepository(Beer::class);
 
+        if (!$producteur) {
+            throw $this->createNotFoundException(
+                'No producteur found for id ' . $id
+            );
+        }
+        if($beer) {
+            throw $this->createNotFoundException(
+                'You have to delete beer before producteur'
+            );
+        }
+        $entityManager->flush();
         return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
     }
 }
