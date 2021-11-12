@@ -14,27 +14,27 @@
 {% block body %}
     <h1 class="font-serif font-medium text-2xl">Producteur index</h1>
     <br>
-    <table class="table">
+    <table class="table-auto">
         <thead>
             <tr>
-                <th class="w-1/5">Id</th>
-                <th class="w-1/5">Name</th>
-                <th class="w-1/5">Email</th>
-                <th class="w-1/5">Photo</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Photo</th>
                 <th class="w-1/5">DateOfBirth</th>
             </tr>
         </thead>
         <tbody>
         {% for producteur in producteurs %}
             <tr>
-                <td class="w-1/5 text-center">{{ producteur.id }}</td>
-                <td class="w-1/5 text-center">{{ producteur.name }}</td>
-                <td class="w-1/5 text-center">{{ producteur.email }}</td>
-                <td class="w-1/5 text-center"><img src="{{ producteur.photo }}"></td>
-                <td class="w-1/5 text-center">{{ producteur.dateOfBirth|date("m/d/Y") }}</td>
-                <td class="w-1/5 text-center">
-                    <a href="{{ path('producteur_show', {'id': producteur.id}) }}"><button class="border-2 border-black">show</button></a>
-                    <a href="{{ path('producteur_edit', {'id': producteur.id}) }}"><button class="border-2 border-black">edit</button></a>
+                <td>{{ producteur.id }}</td>
+                <td>{{ producteur.name }}</td>
+                <td>{{ producteur.email }}</td>
+                <td><img src="{{ producteur.photo }}"></td>
+                <td>{{ producteur.dateOfBirth|date("m/d/Y") }}</td>
+                <td>
+                    <a href="{{ path('producteur_show', {'id': producteur.id}) }}"><button class="rounded-full py-1 px-2 border-2 border-black">show</button></a>
+                    <a href="{{ path('producteur_edit', {'id': producteur.id}) }}"><button class="rounded-full py-1 px-2 border-2 border-black">edit</button></a>
                 </td>
             </tr>
         {% else %}

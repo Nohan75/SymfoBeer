@@ -13,27 +13,27 @@
 {% block body %}
     <h1 class="font-serif font-medium text-2xl">Client index</h1>
     <br>
-    <table class="table">
+    <table class="table-auto">
         <thead>
             <tr>
-                <th class="w-1/5">Id</th>
-                <th class="w-1/5">Name</th>
-                <th class="w-1/5">Email</th>
-                <th class="w-1/5">DateOfBirth</th>
-                <th class="w-1/5">Prenom</th>
+                <th class="text-center">Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>DateOfBirth</th>
+                <th>Prenom</th>
             </tr>
         </thead>
         <tbody>
         {% for client in clients %}
             <tr>
-                <td class="w-1/5 text-center">{{ client.id }}</td>
-                <td class="w-1/5 text-center">{{ client.name }}</td>
-                <td class="w-1/5 text-center">{{ client.email }}</td>
-                <td class="w-1/5 text-center">{{ client.dateOfBirth|date("m/d/Y") }}</td>
-                <td class="w-1/5 text-center">{{ client.prenom }}</td>
-                <td class="w-1/5 text-center">
-                    <a href="{{ path('client_show', {'id': client.id}) }}"><button class="border-2 border-black">show</button></a>
-                    <a href="{{ path('client_edit', {'id': client.id}) }}"><button class="border-2 border-black">edit</button></a>
+                <td>{{ client.id }}</td>
+                <td>{{ client.name }}</td>
+                <td>{{ client.email }}</td>
+                <td>{{ client.dateOfBirth|date("m/d/Y") }}</td>
+                <td>{{ client.prenom }}</td>
+                <td>
+                    <a href="{{ path('client_show', {'id': client.id}) }}"><button class="rounded-full py-1 px-2 border-2 border-black">show</button></a>
+                    <a href="{{ path('client_edit', {'id': client.id}) }}"><button class="rounded-full py-1 px-2 border-2 border-black">edit</button></a>
                 </td>
             </tr>
         {% else %}

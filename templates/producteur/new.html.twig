@@ -3,42 +3,11 @@
 {% block title %}New Producteur{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            {{ form_start(form)}}
+    <h1>Create new Producer</h1>
 
-            {{ form_row(form.name,
-                {
-                    'attr': {
-                    'novalidate': 'novalidate',
-                    'class': 'border-2'
-                }
-                }
-            ) }}
+    {{ include('producteur/_form.html.twig') }}
 
-            {{ form_row(form.email,
-                {
-                    'attr': {
-                    'novalidate': 'novalidate',
-                    'class': 'border-2'
-                }
-                }) }}
-
-            {{ form_row(form.photo,
-                {
-                    'attr': {
-                    'novalidate': 'novalidate',
-                    'class': 'border-2'
-                }
-                }
-            ) }}
-
-            {{ form_row(form.dateOfBirth) }}
-
-            <button type="submit" class="btn btn-primary">Créer</button>
-            {{ form_end(form) }}
-        </div>
-    </div>
+    <a href="{{ path('producteur_index') }}"><button>back to list</button></a>
 {% endblock %}
 
 

@@ -13,24 +13,23 @@
 {% block body %}
     <h1 class="font-serif font-medium text-2xl">Beer index</h1>
     <br>
-
-    <table class="table">
+    <table class="table-auto">
         <thead>
             <tr>
-                <th class="w-1/5">Id</th>
-                <th class="w-1/5">Name</th>
-                <th class="w-1/5">Type</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tbody>
         {% for beer in beers %}
             <tr>
-                <td class="w-1/5 text-center">{{ beer.id }}</td>
-                <td class="w-1/5 text-center">{{ beer.name }}</td>
-                <td class="w-1/5 text-center">{{ beer.type }}</td>
-                <td class="w-1/5 text-center">
-                    <a href="{{ path('beer_show', {'id': beer.id}) }}"><button class="border-2 border-black"> Show</button></a>
-                    <a href="{{ path('beer_edit', {'id': beer.id}) }}"><button class="border-2 border-black"> Edit</button></a>
+                <td>{{ beer.id }}</td>
+                <td>{{ beer.name }}</td>
+                <td>{{ beer.type }}</td>
+                <td>
+                    <a href="{{ path('beer_show', {'id': beer.id}) }}"><button class="rounded-full py-1 px-2 border-2 border-black"> Show</button></a>
+                    <a href="{{ path('beer_edit', {'id': beer.id}) }}"><button class="rounded-full py-1 px-2 border-2 border-black"> Edit</button></a>
                 </td>
             </tr>
         {% else %}
@@ -41,7 +40,6 @@
         </tbody>
     </table>
     <br>
-
 
     <a href="{{ path('beer_new') }}"><button class="rounded-full py-1 px-2 border-2 border-black" > Create new </button> </a>
 
