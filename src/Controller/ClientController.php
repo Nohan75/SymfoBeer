@@ -51,8 +51,17 @@ class ClientController extends AbstractController
     /**
      * @Route("/{id}", name="client_show", methods={"GET"})
      */
-    public function show(Client $client): Response
+    public function show(int $id): Response
     {
+
+            $client = $this->getDoctrine()
+                ->getRepository(Client::class)
+                ->find($id);
+            if (!$client) {
+                throw $this->createNotFoundException(
+                    'No client found for id '.$id
+                );
+            }
         return $this->render('client/show.html.twig', [
             'client' => $client,
         ]);
