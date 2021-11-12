@@ -53,12 +53,22 @@ class ProducteurController extends AbstractController
     /**
      * @Route("/{id}", name="producteur_show", methods={"GET"})
      */
-    public function show(Producteur $producteur): Response
+    public function show(int $id): Response
     {
+        $producteur = $this->getDoctrine()
+            ->getRepository(Producteur::class)
+            ->find($id);
+        if (!$producteur) {
+            throw $this->createNotFoundException(
+                'No produteur found for id '.$id
+            );
+        }
         return $this->render('producteur/show.html.twig', [
             'producteur' => $producteur
         ]);
+
     }
+
 
     /**
      * @Route("/{id}/edit", name="producteur_edit", methods={"GET","POST"})
