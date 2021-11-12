@@ -17,15 +17,8 @@ class BeerType extends AbstractType
             ->add('name')
             ->add('type')
             ->add('producteur_id', EntityType::class, [
-                // looks for choices from this entity
                 'class' => Producteur::class,
-
-                // uses the User.username property as the visible option string
-                'choice_label' => 'name',
-
-                // used to render a select box, check boxes or radios
-                // 'multiple' => true,
-                // 'expanded' => true,
+                'choice_label' => 'name'
             ]);
     }
 

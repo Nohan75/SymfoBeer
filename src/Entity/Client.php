@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
@@ -28,7 +29,7 @@ class Client
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="date", length=255)
      */
     private $dateOfBirth;
 
@@ -66,12 +67,12 @@ class Client
         return $this;
     }
 
-    public function getDateOfBirth(): ?string
+    public function getDateOfBirth(): ?\DateTime
     {
         return $this->dateOfBirth;
     }
 
-    public function setDateOfBirth(string $dateOfBirth): self
+    public function setDateOfBirth(\DateTime $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
 

@@ -29,7 +29,7 @@
                 <td class="w-1/5 text-center">{{ client.id }}</td>
                 <td class="w-1/5 text-center">{{ client.name }}</td>
                 <td class="w-1/5 text-center">{{ client.email }}</td>
-                <td class="w-1/5 text-center">{{ client.dateOfBirth }}</td>
+                <td class="w-1/5 text-center">{{ client.dateOfBirth|date("m/d/Y") }}</td>
                 <td class="w-1/5 text-center">{{ client.prenom }}</td>
                 <td class="w-1/5 text-center">
                     <a href="{{ path('client_show', {'id': client.id}) }}"><button class="border-2 border-black">show</button></a>

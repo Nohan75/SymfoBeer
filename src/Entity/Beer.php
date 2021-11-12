@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\BeerRepository;
 use Doctrine\ORM\Mapping as ORM;
-use phpDocumentor\Reflection\Types\Integer;
 
 /**
  * @ORM\Entity(repositoryClass=BeerRepository::class)
@@ -30,9 +29,14 @@ class Beer
 
     /**
      * @ORM\ManyToOne(targetEntity=Producteur::class, inversedBy="beers")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $producteur_id;
+    private $producteurId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Bucket::class, inversedBy="beer_id")
+     */
+    private $bucket;
 
 
     public function getId(): ?int
@@ -66,12 +70,24 @@ class Beer
 
     public function getProducteurId(): ?Producteur
     {
-        return $this->producteur_id;
+        return $this->producteurId;
     }
 
-    public function setProducteurId( ?Producteur $producteur_id): self
+    public function setProducteurId(?Producteur $producteur_id): self
     {
-        $this->producteur_id = $producteur_id;
+        $this->producteurId = $producteur_id;
+
+        return $this;
+    }
+
+    public function getBucket(): ?Bucket
+    {
+        return $this->bucket;
+    }
+
+    public function setBucket(?Bucket $bucket): self
+    {
+        $this->bucket = $bucket;
 
         return $this;
     }

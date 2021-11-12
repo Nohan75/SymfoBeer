@@ -19,6 +19,16 @@ class BeerRepository extends ServiceEntityRepository
         parent::__construct($registry, Beer::class);
     }
 
+    public function findBeers(): array
+    {
+        return $this->findAll();
+    }
+
+    public function findOneBeer(int $id)
+    {
+        return $this->findOneBy(['id'=>$id]);
+    }
+
     // /**
     //  * @return Beer[] Returns an array of Beer objects
     //  */
