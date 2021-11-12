@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProducteurRepository::class)
@@ -23,16 +24,12 @@ class Producteur
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
-    /**
      * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     */
-    /**
      * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
      */
     private $email;
@@ -44,8 +41,6 @@ class Producteur
 
     /**
      * @ORM\Column(type="date", length=255)
-     */
-    /**
      * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
      */
     private $dateOfBirth;
