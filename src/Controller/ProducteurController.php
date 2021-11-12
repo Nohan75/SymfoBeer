@@ -44,6 +44,7 @@ class ProducteurController extends AbstractController
             return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
         }
 
+
         return $this->renderForm('producteur/new.html.twig', [
             'producteur' => $producteur,
             'form' => $form,
@@ -66,7 +67,6 @@ class ProducteurController extends AbstractController
         return $this->render('producteur/show.html.twig', [
             'producteur' => $producteur
         ]);
-
     }
 
 
@@ -86,7 +86,6 @@ class ProducteurController extends AbstractController
         $entityManager->flush();
         return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
 
-
         return $this->renderForm('producteur/edit.html.twig', [
             'producteur' => $producteur,
             'form' => $form,
@@ -99,15 +98,20 @@ class ProducteurController extends AbstractController
     public function delete(int $id): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $producteur = $entityManager->getRepository(Beer::class)->find($id);
+        $producteur = $entityManager->getRepository(Producteur::class)->find($id);
+        $beer = $entityManager->getRepository(Beer::class);
 
         if (!$producteur) {
             throw $this->createNotFoundException(
                 'No producteur found for id ' . $id
             );
         }
+        if($beer) {
+            throw $this->createNotFoundException(
+                'You have to delete beer before producteur'
+            );
+        }
         $entityManager->flush();
         return $this->redirectToRoute('producteur_index', [], Response::HTTP_SEE_OTHER);
-
     }
 }

@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=ClientRepository::class)
@@ -20,21 +22,26 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
      */
     private $email;
 
     /**
      * @ORM\Column(type="date", length=255)
+     * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
+     * @Assert\LessThanOrEqual("-18 years")
      */
-    private $dateOfBirth;
+    protected $dateOfBirth;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Le contenu ne peut être vide.")
      */
     private $prenom;
 
