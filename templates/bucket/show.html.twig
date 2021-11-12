@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bucket{% endblock %}
+
+{% block body %}
+    <h1>Bucket</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bucket.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('bucket_index') }}">back to list</a>
+
+    <a href="{{ path('bucket_edit', {'id': bucket.id}) }}">edit</a>
+
+    {{ include('bucket/_delete_form.html.twig') }}
+{% endblock %}

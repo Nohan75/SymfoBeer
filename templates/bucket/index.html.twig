@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bucket index{% endblock %}
+{% block page %}Bucket{% endblock %}
+{% block menu %}
+    <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+        <li><a class="hover:text-gray-200" href="{{ path('home') }}">Home</a></li>
+        <li><a class="hover:text-gray-200" href="{{ path('beer_index') }}">Beer</a></li>
+        <li><a class="hover:text-gray-200" href="{{ path('client_index') }}">Client</a></li>
+        <li><a class="hover:text-gray-200" href="{{ path('producteur_index') }}">Producer</a></li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <h1>Bucket index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bucket in buckets %}
+            <tr>
+                <td>{{ bucket.id }}</td>
+                <td>
+                    <a href="{{ path('bucket_show', {'id': bucket.id}) }}">show</a>
+                    <a href="{{ path('bucket_edit', {'id': bucket.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('bucket_new') }}">Create new</a>
+{% endblock %}
