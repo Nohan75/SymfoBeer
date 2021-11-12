@@ -42,7 +42,7 @@ class BeerController extends AbstractController
      * @Route("/addcart/{beer_id}", name="add_cart")
      * @return Response
      */
-    public function buyBeer(string $beer_id, EntityManagerInterface $entityManager): Response
+    public function buyBeer(string $beer_id, EntityManagerInterface $entityManager, BeerRepository $beerRepository): Response
     {
         $beer = $entityManager->getRepository(Beer::class)->findOneBeer($beer_id);
         $client = $entityManager->getRepository(Client::class)->findOneClient(1);
@@ -51,7 +51,9 @@ class BeerController extends AbstractController
             ->setClientId($client);
         $entityManager->persist($panier);
         $entityManager->flush();
-        return $this->render('beerview/index.html.twig');
+        return $this->render('beerview/index.html.twig', [
+            'beers' => $beerRepository->findBeers()
+        ]);
     }
 
     /**

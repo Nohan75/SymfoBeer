@@ -16,6 +16,7 @@ class BeerType extends AbstractType
         $builder
             ->add('name')
             ->add('type')
+            ->add('image')
             ->add('producteur_id', EntityType::class, [
                 'class' => Producteur::class,
                 'choice_label' => 'name'
