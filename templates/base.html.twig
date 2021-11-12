@@ -15,7 +15,6 @@
         {% endblock %}
     </head>
     <body>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <div class="flex flex-wrap">
         <section class="relative mx-auto">
             <nav class="flex justify-between bg-gray-900 text-white w-screen">
@@ -47,6 +46,9 @@
                 </a>
             </nav>
         </section>
+    </div>
+    {% block formulaire %}{% endblock %}
+
     </div>
         {% block body %}{% endblock %}
     </body>

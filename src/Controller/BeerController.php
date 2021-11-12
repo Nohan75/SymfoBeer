@@ -80,8 +80,16 @@ class BeerController extends AbstractController
     /**
      * @Route("/{id}", name="beer_show", methods={"GET"})
      */
-    public function show(Beer $beer): Response
+    public function show(int $id): Response
     {
+        $beer = $this->getDoctrine()
+            ->getRepository(Beer::class)
+            ->find($id);
+        if (!$beer) {
+            throw $this->createNotFoundException(
+                'No beer found for id '.$id
+            );
+        }
         return $this->render('beer/show.html.twig', [
             'beer' => $beer,
         ]);
