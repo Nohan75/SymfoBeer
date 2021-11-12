@@ -53,15 +53,14 @@ class ClientController extends AbstractController
      */
     public function show(int $id): Response
     {
-
-            $client = $this->getDoctrine()
+        $client = $this->getDoctrine()
                 ->getRepository(Client::class)
                 ->find($id);
-            if (!$client) {
-                throw $this->createNotFoundException(
-                    'No client found for id '.$id
-                );
-            }
+        if (!$client) {
+            throw $this->createNotFoundException(
+                'No client found for id '.$id
+            );
+        }
         return $this->render('client/show.html.twig', [
             'client' => $client,
         ]);
@@ -70,16 +69,19 @@ class ClientController extends AbstractController
     /**
      * @Route("/{id}/edit", name="client_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Client $client): Response
+    public function edit(int $id): Response
     {
-        $form = $this->createForm(ClientType::class, $client);
-        $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
+        $client = $entityManager->getRepository(Client::class)->find($id);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
+        if (!$client) {
+            throw $this->createNotFoundException(
+                'No client found for id ' . $id
+            );
         }
+        $entityManager->flush();
+        return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
+
 
         return $this->renderForm('client/edit.html.twig', [
             'client' => $client,
@@ -90,14 +92,17 @@ class ClientController extends AbstractController
     /**
      * @Route("/{id}", name="client_delete", methods={"POST"})
      */
-    public function delete(Request $request, Client $client): Response
+    public function delete($id): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($client);
-            $entityManager->flush();
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $client = $entityManager->getRepository(Client::class)->find($id);
 
+        if (!$client) {
+            throw $this->createNotFoundException(
+                'No client found for id ' . $id
+            );
+        }
+        $entityManager->flush();
         return $this->redirectToRoute('client_index', [], Response::HTTP_SEE_OTHER);
     }
 }

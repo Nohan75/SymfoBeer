@@ -108,5 +108,4 @@ class Beer
 
         return $this;
     }
-
 }
